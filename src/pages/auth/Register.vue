@@ -1,6 +1,6 @@
 <template>
     <div align="center">
-        <h2>로그인</h2>
+        <h2>회원가입</h2>
         <register-form @submit="onSubmit"/>
     </div>
 </template>
@@ -8,8 +8,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import RegisterForm from '@/components/auth/RegisterForm.vue'
-import { Action } from 'vuex-class'
-import { AxiosResponse } from 'axios'
+import { State, Action } from 'vuex-class'
 
 @Component({
     components:{
@@ -17,12 +16,10 @@ import { AxiosResponse } from 'axios'
     }
 })
 export default class Register extends Vue {
-    @Action readonly register: any
+    @Action readonly REGISTER: any
 
-    onSubmit(payload: { username: string, password: string }) {
-        this.register(payload).then((res: AxiosResponse) => {
-            alert(JSON.stringify(res))
-        })
+    onSubmit(payload: { username: string, email: string, password: string }) {
+        this.REGISTER(payload)
     }
 }
 
