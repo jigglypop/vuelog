@@ -34,6 +34,7 @@ export default class Login extends Vue {
         if (this.loginState !== null){
             localStorage.setItem('user', JSON.stringify(this.loginState.user))
             await this.CHECK({ token : this.loginState.user.token })
+            await this.$router.push('/')
         }
     }
 }

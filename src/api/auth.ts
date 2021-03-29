@@ -1,4 +1,4 @@
-import { SERVER_URL } from '../api/SERVER_URL'
+import { SERVER_URL } from './SERVER_URL'
 
 // 로그인
 export const loginApi = async (payload:{ username: string, password: string }) => {
