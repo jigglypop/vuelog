@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { readListApi } from '../api/post'
 import createExtra from './lib'
-// import { Module, Mutation, Action, VuexModule } from 'vuex-module-decorators';
 
 Vue.use(Vuex)
 export interface IPost{

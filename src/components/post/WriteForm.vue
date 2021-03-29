@@ -32,8 +32,5 @@ export default class WriteForm extends Vue {
         const { title, content  } = this;
         this.$emit('submit', { title, content });
     }
-
-
 }
-
 </script>

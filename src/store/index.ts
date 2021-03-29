@@ -7,7 +7,10 @@ import list from './list'
 import post from './post'
 import write from './write'
 import writecomment from './writecomment'
-
+import removecomment from './removecomment'
+import comment from './comment'
+import update from './update'
+import remove from './remove'
 
 Vue.use(Vuex)
 export default new Vuex.Store({
@@ -18,6 +21,10 @@ export default new Vuex.Store({
     list,
     post,
     write,
-    writecomment
+    writecomment,
+    removecomment,
+    comment,
+    update,
+    remove
   }
 })

@@ -5,6 +5,16 @@
                 <post-item :item="getPost.data.post"></post-item>
                 <write-comment-input @submit="onSubmit" :commentError="commentError"></write-comment-input>
             </div>
+
+            <div v-if="getComment.data !== null">
+                <div v-if="getComment.data.comments !== null">
+                    <h4>댓글</h4>
+                    <comment-component :comments="getComment.data.comments" @onCommentDelete="onCommentDelete"></comment-component>
+                </div>
+                <div v-else>
+                    <h4>댓글이 없습니다.</h4>
+                </div>
+            </div>
             <div v-else>
                 <h4>포스트가 없습니다.</h4>
             </div>
@@ -18,38 +28,81 @@ import { Component, Vue } from 'vue-property-decorator'
 import { Action } from 'vuex-class'
 import PostItem from '../../components/post/PostItem.vue'
 import WriteCommentInput from '../../components/comment/WriteCommentInput.vue'
+import CommentComponent from '../../components/comment/CommentComponent.vue'
 
 @Component({
     components:{
         PostItem,
-        WriteCommentInput
+        WriteCommentInput,
+        CommentComponent
     },
     computed : {
         ...mapState({
-            post: 'post'
+            post: 'post',
+            comment: 'comment',
+            writecomment: 'writecomment'
         }),
     }
 })
 export default class Post extends Vue {
     @Action readonly POST: any
+    @Action readonly COMMENT: any
     @Action readonly WRITECOMMENT: any
+    @Action readonly REMOVECOMMENT: any
+
     post! : any
+    comment! : any
+    writecomment! : any
+    removecomment! : any
+    username = ''
+
     public get getPost(): any {
         return this.post
     }
+    public get getComment(): any {
+        return this.comment
+    }
+    public get getWriteComment(): any {
+        return this.writecomment
+    }
+    public get getRemoveComment(): any {
+        return this.removecomment
+    }
     created() {
+        const user = localStorage.getItem('user')
+        if (user){
+            this.username = JSON.parse(user).username
+        }
         this.POST({ postId : this.$route.params._id })
+        this.COMMENT({ postId : this.$route.params._id })
     }
 
-    commentState = {
-        
-    };
-
     commentError = '';
+    writecommentState = {
+
+    }
+
     async onSubmit(payload: { content: string }) {
         const user = localStorage.getItem('user')
         if (user){
             await this.WRITECOMMENT({ content : payload.content, token: JSON.parse(user).token, postId: this.$route.params._id })
+            this.writecommentState = await this.$store.state.writecomment.data
+            this.commentError = await this.$store.state.writecomment.error
+            if (this.writecommentState !== null){
+                await this.$store.commit("CHANGE_COMMENTS", { data: this.writecommentState })
+            }
+        }
+    }
+
+    async onCommentDelete(commentId : string) {
+        const user = localStorage.getItem('user')
+        if (user){
+            await this.REMOVECOMMENT({ commentId : commentId, token: JSON.parse(user).token, postId: this.$route.params._id })
+            this.writecommentState = await this.$store.state.removecomment.data
+            this.commentError = await this.$store.state.removecomment.error
+            if (this.writecommentState !== null){
+                await this.$store.commit("CHANGE_COMMENTS", { data: this.writecommentState })
+            }      
         }
     }
 }

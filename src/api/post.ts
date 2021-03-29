@@ -46,6 +46,43 @@ export const writeApi  = async ( payload: { token: string, title: string, conten
     return { type:'SUCCESS', data: data }
 }
 
+// 업데이트
+export const updateApi  = async ( payload: { token: string, title: string, content: string, postId: string } ) => {
+    const res : any = await fetch(`${SERVER_URL}/api/posts/${payload.postId}`,{
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization":`${payload.token}`
+        },
+        body: JSON.stringify({
+            "title": payload.title,
+            "content": payload.content
+        }),
+    })
+    if (res.status != 200){
+        const error = await res.json()
+        return { type:'FAILURE', data: error }
+    }
+    const data = await res.json()
+    return { type:'SUCCESS', data: data }
+}
+
+// 삭제
+export const removeApi = async ( payload: { token: string, postId: string } ) => {
+    const res : any = await fetch(`${SERVER_URL}/api/posts/${payload.postId}`,{
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization":`${payload.token}`
+        }
+    })
+    if (res.status != 200){
+        const error = await res.json()
+        return { type:'FAILURE', data: error }
+    }
+    const data = await res.json()
+    return { type:'SUCCESS', data: data }
+}
 
 // // 그룹 리스트 읽기
 // export const readGroupListApi  = async (grouplistform: IGroupForm, thunkAPI: any) => {
@@ -59,39 +96,5 @@ export const writeApi  = async ( payload: { token: string, title: string, conten
 // }
 
 
-// // 업데이트
-// export const updateApi  = async ( update: IUpdateForm,  thunkAPI: any) => {
-//     const res : any = await fetch(`${SERVER_URL}/api/posts/${update._id}`,{
-//         method: "PATCH",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Authorization":`${update.token}`
-//         },
-//         body: JSON.stringify({
-//             "title": update.title,
-//             "content": update.content
-//         }),
-//     })
-//     if (res.status != 200){
-//         const error = await res.json()
-//         return await thunkAPI.rejectWithValue(error)
-//     }
-//     return await res.json()
-// }
 
 
-// // 삭제
-// export const removeApi = async ( remove: IRemoveForm,  thunkAPI: any) => {
-//     const res : any = await fetch(`${SERVER_URL}/api/posts/${remove._id}`,{
-//         method: "DELETE",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Authorization":`${remove.token}`
-//         }
-//     })
-//     if (res.status != 200){
-//         const error = await res.json()
-//         return await thunkAPI.rejectWithValue(error)
-//     }
-//     return await res.json()
-// }

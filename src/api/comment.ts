@@ -2,8 +2,8 @@ import { SERVER_URL } from "./SERVER_URL"
 
 
 // 댓글 리스트 읽기
-export const readCommentApi  = async (postId: number, thunkAPI: any) => {
-    const res : any = await fetch(`${SERVER_URL}/api/comment/${postId}`)
+export const readCommentApi  = async ( payload: { postId: string } ) => {
+    const res : any = await fetch(`${SERVER_URL}/api/comment/${payload.postId}`)
     if (res.status != 200){
         const error = await res.json()
         return { type:'FAILURE', data: error }
@@ -12,7 +12,7 @@ export const readCommentApi  = async (postId: number, thunkAPI: any) => {
     return { type:'SUCCESS', data: data }
 }
 
-// 댓글쓰기
+// 댓글 쓰기
 export const writecommentApi  = async ( payload: { token: string, postId: string, content: string } ) => {
     const res : any = await fetch(`${SERVER_URL}/api/comment/${payload.postId}`,{
         method: "POST",
@@ -35,19 +35,20 @@ export const writecommentApi  = async ( payload: { token: string, postId: string
 }
 
 
-// // 삭제
-// export const removeCommentApi = async ( removecomment: IRemoveCommentForm,  thunkAPI: any) => {
-//     const res : any = await fetch(`${SERVER_URL}/api/comment/${removecomment.postId}/${removecomment.commentId}`,{
-//         method: "DELETE",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Authorization":`${removecomment.token}`
-//         }
-//     })
-//     if (res.status != 200){
-//         const error = await res.json()
-//         return await thunkAPI.rejectWithValue(error)
-//     }
-//     return await res.json()
-// }
+// 삭제
+export const removeCommentApi = async ( payload: { token: string, postId: string, commentId: string }) => {
+    const res : any = await fetch(`${SERVER_URL}/api/comment/${payload.postId}/${payload.commentId}`,{
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization":`${payload.token}`
+        }
+    })
+    if (res.status != 200){
+        const error = await res.json()
+        return { type:'FAILURE', data: error }
+    }
+    const data = await res.json()
+    return { type:'SUCCESS', data: data }
+}
 
