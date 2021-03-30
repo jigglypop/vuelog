@@ -8,7 +8,6 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import LoginForm from '@/components/auth/LoginForm.vue'
-import { Action } from 'vuex-class'
 
 @Component({
     components:{
@@ -16,9 +15,6 @@ import { Action } from 'vuex-class'
     }
 })
 export default class Login extends Vue {
-    @Action readonly LOGIN: any
-    @Action readonly CHECK: any
-
     loginState = {
         user: {
             token: ''
@@ -27,13 +23,13 @@ export default class Login extends Vue {
     loginError = '';
 
     async onSubmit(payload: { username: string, password: string }) {
-        await this.LOGIN(payload)
+        await this.$store.dispatch("LOGIN", payload)
         this.loginState = await this.$store.state.login.data
         this.loginError = await this.$store.state.login.error
         
         if (this.loginState !== null){
             localStorage.setItem('user', JSON.stringify(this.loginState.user))
-            await this.CHECK({ token : this.loginState.user.token })
+            await this.$store.dispatch("CHECK", { token : this.loginState.user.token })
             await this.$router.push('/')
         }
     }

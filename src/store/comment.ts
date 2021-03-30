@@ -23,7 +23,7 @@ const comment = {
   },
   mutations:{
     ...createExtra('COMMENT', readCommentApi).mutations,
-    [CHANGE_COMMENTS] (state : ICommentsState, payload : { data : any } ) {
+    [CHANGE_COMMENTS] (state : ICommentsState, payload : { data : any } ) : any {
       state.data = payload.data
     }
   },

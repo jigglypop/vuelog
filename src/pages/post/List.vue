@@ -1,8 +1,7 @@
 <template>
-    <div align="center">
-        <h2>포스트 리스트</h2>
-        <div v-if="getList.data !== null">
-            <div v-if="getList.data.posts !== null">
+    <div>
+        <div v-if="getList.data !== null" class="list-outer">
+            <div v-if="getList.data.posts !== null" class="list-container">
                 <div v-for="post in getList.data.posts" :key="post._id">
                     <list-item :item="post"></list-item>
                 </div>
@@ -42,3 +41,35 @@ export default class List extends Vue {
     }
 }
 </script>
+
+<style scoped>
+    .list-outer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        padding: 0 auto;
+    }
+    h1, h2, h3, h4, h5, h6, p {
+        color: #fafafa;
+        margin: 0;
+    }
+    a:link,
+    a:visited,
+    a:hover  { 
+        color: #fafafa;
+        text-decoration: none;
+    }
+
+    .list-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+
+        @media screen and (max-width: 1200px) {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+        @media screen and (max-width: 800px) {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+</style>

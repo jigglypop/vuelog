@@ -2,7 +2,7 @@ import { SERVER_URL } from './SERVER_URL'
 
 
 // 포스트 읽기
-export const readPostApi  = async ( payload : { postId: number }) => {
+export const readPostApi  = async ( payload : { postId: number } )  => {
     const res : any = await fetch(`${SERVER_URL}/api/posts/${payload.postId}`)
     if (res.status != 200){
         const error = await res.json()
@@ -14,7 +14,7 @@ export const readPostApi  = async ( payload : { postId: number }) => {
 
 
 // // 리스트 읽기
-export const readListApi  = async ( payload: any ) => {
+export const readListApi  = async ( payload: any )  => {
     const res : any = await fetch(`${SERVER_URL}/api/posts`)
     if (res.status != 200){
         const error = await res.json()
@@ -84,16 +84,7 @@ export const removeApi = async ( payload: { token: string, postId: string } ) =>
     return { type:'SUCCESS', data: data }
 }
 
-// // 그룹 리스트 읽기
-// export const readGroupListApi  = async (grouplistform: IGroupForm, thunkAPI: any) => {
-//     console.log(grouplistform)
-//     const res : any = await fetch(`${SERVER_URL}/api/grouplist/${grouplistform.groupId}/?page=${grouplistform.page}`)
-//     if (res.status != 200){
-//         const error = await res.json()
-//         return await thunkAPI.rejectWithValue(error)
-//     }
-//     return await res.json()
-// }
+
 
 
 

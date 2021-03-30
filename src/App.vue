@@ -8,27 +8,43 @@
 </template>
 
 
-
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  @font-face {
+    font-family: "NanumBarunGothic";
+    src: url("./assets/NanumBarunGothicSubset.woff2"); 
+  }
+  #root{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100vw;
+    height: 100vh;
+  }
+  #app{
+    position: relative;
+    margin-top : 50px;
+    width: 100%;
+    height: 100%;
+  }
+  body {
+    background-size:cover;
+    font-family: "NanumBarunGothic", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #141414;
+  }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  ::-webkit-scrollbar {
+    width: 20px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(45deg, #a8ff78, #78ffd6);
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 3px solid transparent;
+  }
+  ::-webkit-scrollbar-track {
+    background-color:transparent;
+  }
 </style>

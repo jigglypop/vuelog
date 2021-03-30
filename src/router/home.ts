@@ -1,7 +1,6 @@
 import Home from '../pages/Home.vue'
-import MainHeader from '@/components/common/MainHeader.vue'
+import MainHeader from '@/components/common/Header.vue'
 import Footer from '@/components/common/Footer.vue'
-import MenuBar from '@/components/common/MenuBar.vue'
 
 export const HomeRouters = [
     {
@@ -9,7 +8,6 @@ export const HomeRouters = [
         name:'Home',
         components:{
             header: MainHeader,
-            menu: MenuBar,
             default: Home,
             footer: Footer
         }

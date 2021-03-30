@@ -1,7 +1,9 @@
 <template>
-    <div>
+    <div class="post-inner">
         <h1>{{ item.title }}</h1>
-        <h4 v-html="item.content"></h4>
+        <hr/>
+        <div v-html="item.content" class="innerdiv"></div>
+        <hr/>
         <h4>{{ item.createdAt }}</h4>
         <h4>{{ item.user.username }}</h4>
         <div v-if="username === item.user.username">
@@ -39,4 +41,39 @@ export default class PostItem extends Vue {
 </script>
 
 <style scoped>
+
+
+.post-inner {
+  padding: 5%;
+  position: relative;
+  background-color: #fafafa;
+}
+
+.current-user button {
+    transition: all 0.2s ease-in-out;
+    transition: 0.5s;
+    border: 2px solid #40e0d0;
+    background-color: transparent;
+    padding: 0;
+    width: 80px;
+    cursor: pointer;
+
+}
+
+.current-user h4 {
+    margin: 8px;
+    font-size: 15px;
+    color: #40e0d0;
+}
+.current-user:hover {
+    background: #40e0d0;
+    transform: scale(1.1);
+}
+.current-user:hover h4 {
+    color: black;
+}
+.under-div {
+  display: flex;
+  justify-content: space-between;
+}
 </style>

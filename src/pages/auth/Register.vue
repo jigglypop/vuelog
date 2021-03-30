@@ -8,7 +8,6 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import RegisterForm from '@/components/auth/RegisterForm.vue'
-import { Action } from 'vuex-class'
 
 @Component({
     components:{
@@ -16,9 +15,6 @@ import { Action } from 'vuex-class'
     }
 })
 export default class Register extends Vue {
-    @Action readonly REGISTER: any
-    @Action readonly CHECK: any
-
     registerState = {
         user: {
             token: ''
@@ -28,13 +24,13 @@ export default class Register extends Vue {
 
     async onSubmit(payload: { username: string, email: string, password: string, passwordConfirm: string }) {
         if (payload.password === payload.passwordConfirm){
-            await this.REGISTER(payload)
+            await this.$store.dispatch("REGISTER",payload)
             this.registerState = await this.$store.state.register.data
             this.registerError = await this.$store.state.register.error
             
             if (this.registerState !== null){
                 localStorage.setItem('user', JSON.stringify(this.registerState.user))
-                await this.CHECK({ token : this.registerState.user.token })
+                await this.$store.dispatch("CHECK", { token : this.registerState.user.token })
                 await this.$router.push('/')
             }
         } else{

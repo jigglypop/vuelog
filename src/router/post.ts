@@ -1,4 +1,4 @@
-import MainHeader from '@/components/common/MainHeader.vue'
+import MainHeader from '@/components/common/Header.vue'
 import Footer from '@/components/common/Footer.vue'
 import Post from '@/pages/post/Post.vue'
 import Write from '@/pages/post/Write.vue'
