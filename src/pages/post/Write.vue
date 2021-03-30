@@ -1,7 +1,11 @@
 <template>
-    <div align="center">
-        <h2>글쓰기</h2>
-        <write-form @submit="onSubmit"  :writeError="writeError"/>
+    <div class="auth-wrapper">
+        <div class="auth-page">
+            <div class="label-title">
+                <h1>글쓰기</h1>
+            </div>
+            <write-form @submit="onSubmit"  :writeError="writeError"/>
+        </div>
     </div>
 </template>
 
@@ -51,3 +55,35 @@ export default class Write extends Vue {
 }
 
 </script>
+
+<style scoped>
+.auth-page {
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: auto;
+  min-height: 70vh;
+  margin-bottom: 100px;
+  box-shadow: 10px 10px 10px black;
+  background: #fafafa;
+}
+
+.auth-wrapper {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 80vw;
+  margin: 0 auto;
+  padding-top: 80px;
+}
+@media (max-width: 1024px) {
+    .auth-wrapper {
+        width: 768px;
+    }
+}
+@media (max-width: 768px) {
+    .auth-wrapper {
+        width: 100%;
+    }
+}
+</style>

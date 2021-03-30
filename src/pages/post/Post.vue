@@ -1,21 +1,22 @@
 <template>
     <div class="post-outer">
-        <div v-if="getPost.data !== null">
-            <div v-if="getPost.data.post !== null">
-                <post-item :item="getPost.data.post"></post-item>
-                <write-comment-input @submit="onSubmit" :commentError="commentError"></write-comment-input>
-            </div>
-            <div v-if="getComment.data !== null">
-                <div v-if="getComment.data.comments !== null">
-                    <h4>댓글</h4>
-                    <comment-component :comments="getComment.data.comments" @onCommentDelete="onCommentDelete"></comment-component>
+        <div class="post-inner">
+            <div v-if="getPost.data !== null">
+                <div v-if="getPost.data.post !== null">
+                    <post-item :item="getPost.data.post"></post-item>
+                    <write-comment-input @submit="onSubmit" :commentError="commentError"></write-comment-input>
+                </div>
+                <div v-if="getComment.data !== null">
+                    <div v-if="getComment.data.comments !== null">
+                        <comment-component :comments="getComment.data.comments" @onCommentDelete="onCommentDelete"></comment-component>
+                    </div>
+                    <div v-else>
+                        <h4>댓글이 없습니다.</h4>
+                    </div>
                 </div>
                 <div v-else>
-                    <h4>댓글이 없습니다.</h4>
+                    <h4>포스트가 없습니다.</h4>
                 </div>
-            </div>
-            <div v-else>
-                <h4>포스트가 없습니다.</h4>
             </div>
         </div>
     </div>
@@ -105,5 +106,11 @@ export default class Post extends Vue {
         padding: 5%;
         margin: 5%;
         background-color: #fafafa;
+    }
+    .post-inner {
+        
+        position: relative;
+        background-color: #fafafa;
+        width: 100%;
     }
 </style>

@@ -15,15 +15,17 @@ export default class Footer extends Vue {
 </script>
 <style scoped>
     .footer {
-        width: 100%;
         z-index:2;
-        background-color : #000000;
+        background-color: rgba(0, 0, 0, 0.6);
         position: fixed;
         bottom: 0;
+        left: 0;
+        right: 0;
     }
     .footertext{
-        margin: 20px;
-        font-size: 12px;
+        color: #fff;
+        font-size: 13px;
         font-weight: 800;
+        transition: all 0.3s ease-in-out;
     }
 </style>

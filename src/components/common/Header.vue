@@ -1,7 +1,7 @@
 <template>
     <div class="nav">
         <div class="container">
-            <div class="logo">
+            <div class="headerdiv">
                 <router-link :to="{name:'Home'}">VUELOG</router-link>
             </div>
             <div v-if="getUsername.data !== null" >
@@ -53,9 +53,10 @@ export default class Header extends Vue {
     .headerdiv {
         font-size: 15px;
         display: inline-block;
+        padding: 10px;
     }
     .container {
-        margin: 0 10px;
+        padding: 0;
     }
 
     .nav {
@@ -66,6 +67,7 @@ export default class Header extends Vue {
         right: 0;
         transition: all 0.3s ease-in-out;
         z-index: 2;
+        height: 55px;
     }
     .nav .logo {
         color: #fff;
@@ -109,7 +111,6 @@ export default class Header extends Vue {
     .nav a:hover {
         color: #78ffd6;
         transition: all 0.3s ease-in-out;
-        cursor: pointer;
     }
 
     .logout-button {

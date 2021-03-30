@@ -47,4 +47,9 @@
   ::-webkit-scrollbar-track {
     background-color:transparent;
   }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 </style>

@@ -8,7 +8,6 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import List from './post/List.vue'
-import * as THREE from 'three'
 import Gltf from '../components/common/Gltf.vue'
 
 @Component({
@@ -17,45 +16,7 @@ import Gltf from '../components/common/Gltf.vue'
         Gltf
     }
 })
-export default class Home extends Vue{
-    mounted() {
-        let camera: any;
-        let scene: any; 
-        let renderer: any;
-        let geometry: any;
-        let material: any;
-        let mesh: any;
-
-        const init = async ()=> {
-            camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10);
-            camera.position.z = 1;
-            scene = new THREE.Scene();
-            geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
-            material = new THREE.MeshNormalMaterial();
-            mesh = new THREE.Mesh(geometry, material);
-            scene.add(mesh);
-            // const loader = new GLTFLoader();
-            // loader.load('outer.gltf', ( gltf )=> {
-            //     scene.add(gltf.scene)
-            // })
-            renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-
-            const maincanvas = document.getElementById('maincanvas')
-            if (maincanvas){
-                maincanvas.appendChild(renderer.domElement);
-            }
-
-        }
-        const animate = ()=> {
-            requestAnimationFrame(animate);
-            mesh.rotation.x += 0.01;
-            mesh.rotation.y += 0.02;
-            renderer.render(scene, camera);
-        }
-        init()
-        animate();
-    }               
+export default class Home extends Vue{            
 }
 </script>
 
